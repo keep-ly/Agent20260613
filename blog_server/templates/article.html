@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ article.title }} - RL Research Digest</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    {% if article.summary %}
+        <meta name="description" content="{{ article.summary[:160] | striptags }}">
+    {% endif %}
+</head>
+<body>
+    <header class="site-header">
+        <div class="container">
+            <h1><a href="/">RL Research Digest</a></h1>
+            <p class="subtitle">强化学习论文与前沿资讯自动聚合</p>
+        </div>
+    </header>
+
+    <main class="container">
+        <article class="article-full">
+            <header class="article-header">
+                <h1>{{ article.title }}</h1>
+                <div class="meta">
+                    <time>{{ article.published_at }}</time>
+                    {% if article.tags %}
+                        <span class="tags">
+                            {% for tag in article.tags.split(',') %}
+                                <span class="tag">{{ tag.strip() }}</span>
+                            {% endfor %}
+                        </span>
+                    {% endif %}
+                </div>
+                {% if article.summary %}
+                    <div class="article-summary-box">
+                        <strong>摘要：</strong>{{ article.summary | safe }}
+                    </div>
+                {% endif %}
+            </header>
+
+            <div class="article-content">
+                {{ article.content | safe }}
+            </div>
+        </article>
+
+        <nav class="article-nav">
+            <a href="/">← 返回首页</a>
+        </nav>
+    </main>
+
+    <footer class="site-footer">
+        <div class="container">
+            <p>Powered by RL Research Agent</p>
+        </div>
+    </footer>
+</body>
+</html>

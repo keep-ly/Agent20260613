@@ -1,0 +1,478 @@
+2026-06-13 10:40:25,959 [WARNING] __main__: ⚠ 未设置 OPENAI_API_KEY 环境变量，LLM 功能可能不可用
+2026-06-13 10:40:25,959 [WARNING] __main__:   请运行: set OPENAI_API_KEY=your-key  (Windows)
+2026-06-13 10:40:25,960 [WARNING] __main__:   或创建 .env 文件配置
+2026-06-13 10:40:25,960 [INFO] __main__: 正在初始化 RL Agent...
+2026-06-13 10:40:25,963 [INFO] langchain_openai.chat_models._client_utils: langchain-openai detected system proxy configuration and no explicit `http_socket_options` / `http_client` / `http_async_client` / `openai_proxy`; skipping the custom `httpx` transport so httpx's env-proxy auto-detection applies. Pass `http_socket_options=[...]` to opt back into kernel-level TCP keepalive tuning on top of the env proxy.
+2026-06-13 10:40:27,682 [INFO] __main__: Agent 初始化完成
+2026-06-13 10:40:27,682 [INFO] __main__: 博客地址: http://127.0.0.1:5000
+2026-06-13 10:40:27,682 [INFO] __main__: === 单次运行模式 ===
+2026-06-13 10:40:27,684 [INFO] agent.agent_core: === RL Agent 流水线启动 - 2026年06月13日 ===
+2026-06-13 10:40:27,684 [INFO] agent.agent_core: 步骤 1/4: 抓取 arXiv 论文...
+2026-06-13 10:40:27,708 [INFO] agent.tools.arxiv_tool: ArxivTool: 搜索 'reinforcement learning', 最近 1 天, 最多 15 篇
+2026-06-13 10:40:27,708 [INFO] agent.tools.arxiv_tool: ArxivTool: 请求 http://export.arxiv.org/api/query?search_query=%28reinforcement+learning%29+AND+%28cat%3Acs.LG+OR+cat%3Acs.AI+OR+cat%3Acs.CL+OR+cat%3Astat.ML%29&start=0&max_results=15&sortBy=submittedDate&sortOrder=descending
+2026-06-13 10:40:38,776 [ERROR] agent.tools.arxiv_tool: ArxivTool 错误: HTTP Error 502: Bad Gateway
+2026-06-13 10:40:38,777 [INFO] agent.agent_core: 步骤 2/4: 抓取 Reddit 讨论...
+2026-06-13 10:40:38,777 [INFO] agent.tools.reddit_tool: RedditTool: 获取 r/reinforcementlearning 热门帖子
+2026-06-13 10:40:43,881 [ERROR] agent.tools.reddit_tool: RedditTool 错误: <urlopen error [SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1017)>
+2026-06-13 10:40:43,882 [INFO] agent.agent_core: 步骤 3/4: LLM 整理内容...
+2026-06-13 10:40:43,882 [INFO] agent.content_processor: ContentProcessor: 正在整理原始数据 (89 字符)
+2026-06-13 10:40:48,933 [INFO] openai._base_client: Retrying request to /chat/completions in 0.411300 seconds
+2026-06-13 10:40:54,351 [INFO] openai._base_client: Retrying request to /chat/completions in 0.845278 seconds
+2026-06-13 10:41:00,206 [ERROR] agent.content_processor: ContentProcessor 整理失败: Connection error.
+2026-06-13 10:41:05,215 [INFO] openai._base_client: Retrying request to /chat/completions in 0.415948 seconds
+2026-06-13 10:41:10,637 [INFO] openai._base_client: Retrying request to /chat/completions in 0.840073 seconds
+2026-06-13 10:41:16,486 [ERROR] agent.content_processor: 生成摘要失败: Connection error.
+2026-06-13 10:41:16,487 [INFO] agent.agent_core: 步骤 4/4: 发布到博客...
+2026-06-13 10:41:16,488 [INFO] agent.tools.publish_tool: PublishTool: 准备发布文章 '强化学习研究日报 - 2026年06月13日'
+2026-06-13 10:41:16,796 [INFO] agent.tools.publish_tool: PublishTool: 发布成功 - http://127.0.0.1:5000/article/强化学习研究日报---2026年06月13日-171cc334
+2026-06-13 10:41:16,798 [INFO] agent.agent_core: 发布结果: [成功] 文章已发布！
+标题: 强化学习研究日报 - 2026年06月13日
+URL: http://127.0.0.1:5000/article/强化学习研究日报---2026年06月13日-171cc334
+ID: 2
+2026-06-13 10:41:16,798 [INFO] agent.agent_core: === 流水线完成 ===
+2026-06-13 10:41:16,799 [INFO] agent.agent_core: 论文: 0 篇 | 讨论: 0 条
+2026-06-13 10:41:16,799 [INFO] agent.agent_core: 发布: 成功
+2026-06-13 10:41:16,799 [WARNING] agent.agent_core: 错误: ['arXiv 抓取失败: [错误] arXiv API 请求失败: HTTP Error 502: Bad Gateway', 'Reddit 抓取失败: [错误] Reddit API 请求失败: <urlopen error [SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1017)>']
+2026-06-13 10:41:16,800 [INFO] __main__: 结果摘要: {'date': '2026年06月13日', 'arxiv_papers': 0, 'reddit_posts': 0, 'published': True, 'article_url': 'http://127.0.0.1:5000/article/强化学习研究日报---2026年06月13日-171cc334\nID: 2', 'errors': ['arXiv 抓取失败: [错误] arXiv API 请求失败: HTTP Error 502: Bad Gateway', 'Reddit 抓取失败: [错误] Reddit API 请求失败: <urlopen error [SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1017)>']}
+2026-06-13 11:00:16,440 [WARNING] __main__: ⚠ 未设置 OPENAI_API_KEY 环境变量，LLM 功能可能不可用
+2026-06-13 11:00:16,441 [WARNING] __main__:   请运行: set OPENAI_API_KEY=your-key  (Windows)
+2026-06-13 11:00:16,441 [WARNING] __main__:   或创建 .env 文件配置
+2026-06-13 11:00:16,441 [INFO] __main__: 正在初始化 RL Agent...
+2026-06-13 11:00:17,649 [INFO] __main__: Agent 初始化完成
+2026-06-13 11:00:17,649 [INFO] __main__: 博客地址: http://127.0.0.1:5000
+2026-06-13 11:00:17,650 [INFO] __main__: === 单次运行模式 ===
+2026-06-13 11:00:17,651 [INFO] agent.agent_core: === RL Agent 流水线启动 - 2026年06月13日 ===
+2026-06-13 11:00:17,651 [INFO] agent.agent_core: 步骤 1/4: 抓取 arXiv 论文...
+2026-06-13 11:00:17,664 [INFO] agent.tools.arxiv_tool: ArxivTool: 搜索 'reinforcement learning', 最近 1 天, 最多 15 篇
+2026-06-13 11:00:17,664 [INFO] agent.tools.arxiv_tool: ArxivTool: 请求 http://export.arxiv.org/api/query?search_query=%28reinforcement+learning%29+AND+%28cat%3Acs.LG+OR+cat%3Acs.AI+OR+cat%3Acs.CL+OR+cat%3Astat.ML%29&start=0&max_results=15&sortBy=submittedDate&sortOrder=descending
+2026-06-13 11:00:20,079 [INFO] agent.tools.arxiv_tool: ArxivTool: 找到 0 篇论文
+2026-06-13 11:00:20,079 [INFO] agent.dedup: Dedup: 0 条中 0 条未处理
+2026-06-13 11:00:20,079 [INFO] agent.agent_core: 步骤 2/4: 抓取 Reddit 讨论...
+2026-06-13 11:00:20,079 [INFO] agent.tools.reddit_tool: RedditTool: 获取 r/reinforcementlearning 热门帖子
+2026-06-13 11:00:50,325 [ERROR] agent.tools.reddit_tool: RedditTool 错误: <urlopen error timed out>
+2026-06-13 11:00:50,327 [INFO] agent.agent_core: 步骤 3/4: LLM 整理内容...
+2026-06-13 11:00:50,327 [INFO] agent.content_processor: ContentProcessor: 正在整理原始数据 (58 字符)
+2026-06-13 11:01:32,718 [INFO] openai._base_client: Retrying request to /chat/completions in 0.497785 seconds
+2026-06-13 11:02:15,327 [INFO] openai._base_client: Retrying request to /chat/completions in 0.958278 seconds
+2026-06-13 11:03:27,726 [WARNING] __main__: ⚠ 未设置 OPENAI_API_KEY 环境变量，LLM 功能可能不可用
+2026-06-13 11:03:27,727 [WARNING] __main__:   请运行: set OPENAI_API_KEY=your-key  (Windows)
+2026-06-13 11:03:27,727 [WARNING] __main__:   或创建 .env 文件配置
+2026-06-13 11:03:27,727 [INFO] __main__: 正在初始化 RL Agent...
+2026-06-13 11:03:28,714 [INFO] __main__: Agent 初始化完成
+2026-06-13 11:03:28,714 [INFO] __main__: 博客地址: http://127.0.0.1:5000
+2026-06-13 11:03:28,714 [INFO] __main__: === 单次运行模式 ===
+2026-06-13 11:03:28,715 [INFO] agent.agent_core: === RL Agent 流水线启动 - 2026年06月13日 ===
+2026-06-13 11:03:28,715 [INFO] agent.agent_core: 步骤 1/4: 抓取 arXiv 论文...
+2026-06-13 11:03:28,731 [INFO] agent.tools.arxiv_tool: ArxivTool: 搜索 'reinforcement learning', 最近 1 天, 最多 15 篇
+2026-06-13 11:03:28,732 [INFO] agent.tools.arxiv_tool: ArxivTool: 请求 http://export.arxiv.org/api/query?search_query=%28reinforcement+learning%29+AND+%28cat%3Acs.LG+OR+cat%3Acs.AI+OR+cat%3Acs.CL+OR+cat%3Astat.ML%29&start=0&max_results=15&sortBy=submittedDate&sortOrder=descending
+2026-06-13 11:03:31,325 [INFO] agent.tools.arxiv_tool: ArxivTool: 找到 0 篇论文
+2026-06-13 11:03:31,325 [INFO] agent.dedup: Dedup: 0 条中 0 条未处理
+2026-06-13 11:03:31,326 [INFO] agent.agent_core: 步骤 2/4: 抓取 Reddit 讨论...
+2026-06-13 11:03:31,327 [INFO] agent.tools.reddit_tool: RedditTool: 获取 r/reinforcementlearning 热门帖子
+2026-06-13 11:04:01,483 [ERROR] agent.tools.reddit_tool: RedditTool 错误: <urlopen error timed out>
+2026-06-13 11:04:01,487 [INFO] agent.agent_core: 步骤 3/4: LLM 整理内容...
+2026-06-13 11:04:01,487 [INFO] agent.content_processor: ContentProcessor: 正在整理原始数据 (58 字符)
+2026-06-13 11:04:43,724 [INFO] openai._base_client: Retrying request to /chat/completions in 0.465656 seconds
+2026-06-13 11:05:26,261 [INFO] openai._base_client: Retrying request to /chat/completions in 0.838473 seconds
+2026-06-13 11:06:09,376 [ERROR] agent.content_processor: ContentProcessor 整理失败: Request timed out.
+2026-06-13 11:06:51,435 [INFO] openai._base_client: Retrying request to /chat/completions in 0.425399 seconds
+2026-06-13 11:07:53,657 [WARNING] __main__: ⚠ 未设置 OPENAI_API_KEY 环境变量，LLM 功能可能不可用
+2026-06-13 11:07:53,657 [WARNING] __main__:   请运行: set OPENAI_API_KEY=your-key  (Windows)
+2026-06-13 11:07:53,657 [WARNING] __main__:   或创建 .env 文件配置
+2026-06-13 11:07:53,657 [INFO] __main__: 正在初始化 RL Agent...
+2026-06-13 11:07:54,684 [INFO] __main__: Agent 初始化完成
+2026-06-13 11:07:54,684 [INFO] __main__: 博客地址: http://127.0.0.1:5000
+2026-06-13 11:07:54,684 [INFO] __main__: === 单次运行模式 ===
+2026-06-13 11:07:54,685 [INFO] agent.agent_core: === RL Agent 流水线启动 - 2026年06月13日 ===
+2026-06-13 11:07:54,686 [INFO] agent.agent_core: 步骤 1/4: 抓取 arXiv 论文...
+2026-06-13 11:07:54,696 [INFO] agent.tools.arxiv_tool: ArxivTool: 搜索 'reinforcement learning', 最近 1 天, 最多 15 篇
+2026-06-13 11:07:54,696 [INFO] agent.tools.arxiv_tool: ArxivTool: 请求 http://export.arxiv.org/api/query?search_query=%28reinforcement+learning%29+AND+%28cat%3Acs.LG+OR+cat%3Acs.AI+OR+cat%3Acs.CL+OR+cat%3Astat.ML%29&start=0&max_results=15&sortBy=submittedDate&sortOrder=descending
+2026-06-13 11:07:57,277 [INFO] agent.tools.arxiv_tool: ArxivTool: 找到 0 篇论文
+2026-06-13 11:07:57,277 [INFO] agent.dedup: Dedup: 0 条中 0 条未处理
+2026-06-13 11:07:57,277 [INFO] agent.agent_core: 步骤 2/4: 抓取 Reddit 讨论...
+2026-06-13 11:07:57,281 [INFO] agent.tools.reddit_tool: RedditTool: 获取 r/reinforcementlearning 热门帖子
+2026-06-13 11:08:27,522 [ERROR] agent.tools.reddit_tool: RedditTool 错误: <urlopen error timed out>
+2026-06-13 11:08:27,524 [INFO] agent.agent_core: 步骤 3/4: LLM 整理内容...
+2026-06-13 11:08:27,526 [INFO] agent.content_processor: ContentProcessor: 正在整理原始数据 (58 字符)
+2026-06-13 11:08:28,642 [INFO] httpx: HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 401 Unauthorized"
+2026-06-13 11:08:28,652 [ERROR] agent.content_processor: ContentProcessor 整理失败: Error code: 401 - {'error': {'message': 'Incorrect API key provided: your-ope*******-key. You can find your API key at https://platform.openai.com/account/api-keys.', 'type': 'invalid_request_error', 'param': None, 'code': 'invalid_api_key'}}
+2026-06-13 11:08:29,135 [INFO] httpx: HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 401 Unauthorized"
+2026-06-13 11:08:29,137 [ERROR] agent.content_processor: 生成摘要失败: Error code: 401 - {'error': {'message': 'Incorrect API key provided: your-ope*******-key. You can find your API key at https://platform.openai.com/account/api-keys.', 'type': 'invalid_request_error', 'param': None, 'code': 'invalid_api_key'}}
+2026-06-13 11:08:29,137 [INFO] agent.agent_core: 步骤 4/4: 发布到博客...
+2026-06-13 11:08:29,140 [INFO] agent.tools.publish_tool: PublishTool: 准备发布文章 '强化学习研究日报 - 2026年06月13日'
+2026-06-13 11:08:29,150 [ERROR] agent.tools.publish_tool: API 请求失败 [409]: {
+  "error": "Article with this slug already exists"
+}
+
+2026-06-13 11:08:29,150 [ERROR] agent.tools.publish_tool: PublishTool: 发布失败 - HTTP 409 {
+  "error": "Article with this slug already exists"
+}
+
+2026-06-13 11:08:29,150 [INFO] agent.agent_core: 发布结果: [失败] 文章发布失败: HTTP 409 - {
+  "error": "Article with this slug already exists"
+}
+
+2026-06-13 11:08:29,150 [INFO] agent.agent_core: === 流水线完成 ===
+2026-06-13 11:08:29,150 [INFO] agent.agent_core: 论文: 0 篇 | 讨论: 0 条
+2026-06-13 11:08:29,150 [INFO] agent.agent_core: 发布: 失败
+2026-06-13 11:08:29,150 [WARNING] agent.agent_core: 错误: ['Reddit 抓取失败: [错误] Reddit API 请求失败: <urlopen error timed out>', '发布失败: [失败] 文章发布失败: HTTP 409 - {\n  "error": "Article with this slug already exists"\n}\n']
+2026-06-13 11:08:29,155 [INFO] __main__: 结果摘要: {'date': '2026年06月13日', 'arxiv_papers': 0, 'reddit_posts': 0, 'published': False, 'article_url': None, 'errors': ['Reddit 抓取失败: [错误] Reddit API 请求失败: <urlopen error timed out>', '发布失败: [失败] 文章发布失败: HTTP 409 - {\n  "error": "Article with this slug already exists"\n}\n']}
+2026-06-13 11:08:35,451 [WARNING] __main__: ⚠ 未设置 OPENAI_API_KEY 环境变量，LLM 功能可能不可用
+2026-06-13 11:08:35,451 [WARNING] __main__:   请运行: set OPENAI_API_KEY=your-key  (Windows)
+2026-06-13 11:08:35,451 [WARNING] __main__:   或创建 .env 文件配置
+2026-06-13 11:08:35,451 [INFO] __main__: 正在初始化 RL Agent...
+2026-06-13 11:08:35,456 [INFO] langchain_openai.chat_models._client_utils: langchain-openai detected system proxy configuration and no explicit `http_socket_options` / `http_client` / `http_async_client` / `openai_proxy`; skipping the custom `httpx` transport so httpx's env-proxy auto-detection applies. Pass `http_socket_options=[...]` to opt back into kernel-level TCP keepalive tuning on top of the env proxy.
+2026-06-13 11:08:36,534 [INFO] __main__: Agent 初始化完成
+2026-06-13 11:08:36,536 [INFO] __main__: 博客地址: http://127.0.0.1:5000
+2026-06-13 11:08:36,536 [INFO] __main__: === 单次运行模式 ===
+2026-06-13 11:08:36,536 [INFO] agent.agent_core: === RL Agent 流水线启动 - 2026年06月13日 ===
+2026-06-13 11:08:36,536 [INFO] agent.agent_core: 步骤 1/4: 抓取 arXiv 论文...
+2026-06-13 11:08:36,550 [INFO] agent.tools.arxiv_tool: ArxivTool: 搜索 'reinforcement learning', 最近 1 天, 最多 15 篇
+2026-06-13 11:08:36,551 [INFO] agent.tools.arxiv_tool: ArxivTool: 请求 http://export.arxiv.org/api/query?search_query=%28reinforcement+learning%29+AND+%28cat%3Acs.LG+OR+cat%3Acs.AI+OR+cat%3Acs.CL+OR+cat%3Astat.ML%29&start=0&max_results=15&sortBy=submittedDate&sortOrder=descending
+2026-06-13 11:08:39,602 [INFO] agent.tools.arxiv_tool: ArxivTool: 找到 0 篇论文
+2026-06-13 11:08:39,602 [INFO] agent.dedup: Dedup: 0 条中 0 条未处理
+2026-06-13 11:08:39,602 [INFO] agent.agent_core: 步骤 2/4: 抓取 Reddit 讨论...
+2026-06-13 11:08:39,604 [INFO] agent.tools.reddit_tool: RedditTool: 获取 r/reinforcementlearning 热门帖子
+2026-06-13 11:08:40,476 [ERROR] agent.tools.reddit_tool: RedditTool 错误: HTTP Error 403: Blocked
+2026-06-13 11:08:40,479 [INFO] agent.agent_core: 步骤 3/4: LLM 整理内容...
+2026-06-13 11:08:40,479 [INFO] agent.content_processor: ContentProcessor: 正在整理原始数据 (58 字符)
+2026-06-13 11:08:41,410 [INFO] httpx: HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 401 Unauthorized"
+2026-06-13 11:08:41,411 [ERROR] agent.content_processor: ContentProcessor 整理失败: Error code: 401 - {'error': {'message': 'Incorrect API key provided: your-ope*******-key. You can find your API key at https://platform.openai.com/account/api-keys.', 'type': 'invalid_request_error', 'param': None, 'code': 'invalid_api_key'}}
+2026-06-13 11:08:42,079 [INFO] httpx: HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 401 Unauthorized"
+2026-06-13 11:08:42,079 [ERROR] agent.content_processor: 生成摘要失败: Error code: 401 - {'error': {'message': 'Incorrect API key provided: your-ope*******-key. You can find your API key at https://platform.openai.com/account/api-keys.', 'type': 'invalid_request_error', 'param': None, 'code': 'invalid_api_key'}}
+2026-06-13 11:08:42,079 [INFO] agent.agent_core: 步骤 4/4: 发布到博客...
+2026-06-13 11:08:42,083 [INFO] agent.tools.publish_tool: PublishTool: 准备发布文章 '强化学习研究日报 - 2026年06月13日'
+2026-06-13 11:08:42,088 [ERROR] agent.tools.publish_tool: API 请求失败 [409]: {
+  "error": "Article with this slug already exists"
+}
+
+2026-06-13 11:08:42,088 [ERROR] agent.tools.publish_tool: PublishTool: 发布失败 - HTTP 409 {
+  "error": "Article with this slug already exists"
+}
+
+2026-06-13 11:08:42,089 [INFO] agent.agent_core: 发布结果: [失败] 文章发布失败: HTTP 409 - {
+  "error": "Article with this slug already exists"
+}
+
+2026-06-13 11:08:42,089 [INFO] agent.agent_core: === 流水线完成 ===
+2026-06-13 11:08:42,089 [INFO] agent.agent_core: 论文: 0 篇 | 讨论: 0 条
+2026-06-13 11:08:42,089 [INFO] agent.agent_core: 发布: 失败
+2026-06-13 11:08:42,090 [WARNING] agent.agent_core: 错误: ['Reddit 抓取失败: [错误] Reddit API 请求失败: HTTP Error 403: Blocked', '发布失败: [失败] 文章发布失败: HTTP 409 - {\n  "error": "Article with this slug already exists"\n}\n']
+2026-06-13 11:08:42,090 [INFO] __main__: 结果摘要: {'date': '2026年06月13日', 'arxiv_papers': 0, 'reddit_posts': 0, 'published': False, 'article_url': None, 'errors': ['Reddit 抓取失败: [错误] Reddit API 请求失败: HTTP Error 403: Blocked', '发布失败: [失败] 文章发布失败: HTTP 409 - {\n  "error": "Article with this slug already exists"\n}\n']}
+2026-06-13 11:08:52,473 [WARNING] __main__: ⚠ 未设置 OPENAI_API_KEY 环境变量，LLM 功能可能不可用
+2026-06-13 11:08:52,473 [WARNING] __main__:   请运行: set OPENAI_API_KEY=your-key  (Windows)
+2026-06-13 11:08:52,473 [WARNING] __main__:   或创建 .env 文件配置
+2026-06-13 11:08:52,473 [INFO] __main__: 正在初始化 RL Agent...
+2026-06-13 11:08:52,476 [INFO] langchain_openai.chat_models._client_utils: langchain-openai detected system proxy configuration and no explicit `http_socket_options` / `http_client` / `http_async_client` / `openai_proxy`; skipping the custom `httpx` transport so httpx's env-proxy auto-detection applies. Pass `http_socket_options=[...]` to opt back into kernel-level TCP keepalive tuning on top of the env proxy.
+2026-06-13 11:08:53,547 [INFO] __main__: Agent 初始化完成
+2026-06-13 11:08:53,547 [INFO] __main__: 博客地址: http://127.0.0.1:5000
+2026-06-13 11:08:53,547 [INFO] __main__: === 单次运行模式 ===
+2026-06-13 11:08:53,547 [INFO] agent.agent_core: === RL Agent 流水线启动 - 2026年06月13日 ===
+2026-06-13 11:08:53,547 [INFO] agent.agent_core: 步骤 1/4: 抓取 arXiv 论文...
+2026-06-13 11:08:53,564 [INFO] agent.tools.arxiv_tool: ArxivTool: 搜索 'reinforcement learning', 最近 1 天, 最多 15 篇
+2026-06-13 11:08:53,564 [INFO] agent.tools.arxiv_tool: ArxivTool: 请求 http://export.arxiv.org/api/query?search_query=%28reinforcement+learning%29+AND+%28cat%3Acs.LG+OR+cat%3Acs.AI+OR+cat%3Acs.CL+OR+cat%3Astat.ML%29&start=0&max_results=15&sortBy=submittedDate&sortOrder=descending
+2026-06-13 11:08:56,095 [INFO] agent.tools.arxiv_tool: ArxivTool: 找到 0 篇论文
+2026-06-13 11:08:56,096 [INFO] agent.dedup: Dedup: 0 条中 0 条未处理
+2026-06-13 11:08:56,096 [INFO] agent.agent_core: 步骤 2/4: 抓取 Reddit 讨论...
+2026-06-13 11:08:56,097 [INFO] agent.tools.reddit_tool: RedditTool: 获取 r/reinforcementlearning 热门帖子
+2026-06-13 11:08:56,850 [ERROR] agent.tools.reddit_tool: RedditTool 错误: HTTP Error 403: Blocked
+2026-06-13 11:08:56,853 [INFO] agent.agent_core: 步骤 3/4: LLM 整理内容...
+2026-06-13 11:08:56,854 [INFO] agent.content_processor: ContentProcessor: 正在整理原始数据 (58 字符)
+2026-06-13 11:08:57,739 [INFO] httpx: HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 401 Unauthorized"
+2026-06-13 11:08:57,743 [ERROR] agent.content_processor: ContentProcessor 整理失败: Error code: 401 - {'error': {'message': 'Incorrect API key provided: your-ope*******-key. You can find your API key at https://platform.openai.com/account/api-keys.', 'type': 'invalid_request_error', 'param': None, 'code': 'invalid_api_key'}}
+2026-06-13 11:08:58,063 [INFO] httpx: HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 401 Unauthorized"
+2026-06-13 11:08:58,103 [ERROR] agent.content_processor: 生成摘要失败: Error code: 401 - {'error': {'message': 'Incorrect API key provided: your-ope*******-key. You can find your API key at https://platform.openai.com/account/api-keys.', 'type': 'invalid_request_error', 'param': None, 'code': 'invalid_api_key'}}
+2026-06-13 11:08:58,105 [INFO] agent.agent_core: 步骤 4/4: 发布到博客...
+2026-06-13 11:08:58,107 [INFO] agent.tools.publish_tool: PublishTool: 准备发布文章 '强化学习研究日报 - 2026年06月13日'
+2026-06-13 11:08:58,113 [ERROR] agent.tools.publish_tool: API 请求失败 [409]: {
+  "error": "Article with this slug already exists"
+}
+
+2026-06-13 11:08:58,115 [ERROR] agent.tools.publish_tool: PublishTool: 发布失败 - HTTP 409 {
+  "error": "Article with this slug already exists"
+}
+
+2026-06-13 11:08:58,116 [INFO] agent.agent_core: 发布结果: [失败] 文章发布失败: HTTP 409 - {
+  "error": "Article with this slug already exists"
+}
+
+2026-06-13 11:08:58,117 [INFO] agent.agent_core: === 流水线完成 ===
+2026-06-13 11:08:58,117 [INFO] agent.agent_core: 论文: 0 篇 | 讨论: 0 条
+2026-06-13 11:08:58,117 [INFO] agent.agent_core: 发布: 失败
+2026-06-13 11:08:58,117 [WARNING] agent.agent_core: 错误: ['Reddit 抓取失败: [错误] Reddit API 请求失败: HTTP Error 403: Blocked', '发布失败: [失败] 文章发布失败: HTTP 409 - {\n  "error": "Article with this slug already exists"\n}\n']
+2026-06-13 11:08:58,117 [INFO] __main__: 结果摘要: {'date': '2026年06月13日', 'arxiv_papers': 0, 'reddit_posts': 0, 'published': False, 'article_url': None, 'errors': ['Reddit 抓取失败: [错误] Reddit API 请求失败: HTTP Error 403: Blocked', '发布失败: [失败] 文章发布失败: HTTP 409 - {\n  "error": "Article with this slug already exists"\n}\n']}
+2026-06-13 11:29:27,541 [INFO] __main__: 正在初始化 RL Agent...
+2026-06-13 11:29:27,543 [INFO] langchain_openai.chat_models._client_utils: langchain-openai detected system proxy configuration and no explicit `http_socket_options` / `http_client` / `http_async_client` / `openai_proxy`; skipping the custom `httpx` transport so httpx's env-proxy auto-detection applies. Pass `http_socket_options=[...]` to opt back into kernel-level TCP keepalive tuning on top of the env proxy.
+2026-06-13 11:29:28,958 [INFO] __main__: Agent 初始化完成
+2026-06-13 11:29:28,959 [INFO] __main__: 博客地址: http://127.0.0.1:5000
+2026-06-13 11:29:28,959 [INFO] __main__: === 单次运行模式 ===
+2026-06-13 11:29:28,959 [INFO] agent.agent_core: === RL Agent 流水线启动 - 2026年06月13日 ===
+2026-06-13 11:29:28,959 [INFO] agent.agent_core: 步骤 1/4: 抓取 arXiv 论文...
+2026-06-13 11:29:28,979 [INFO] agent.tools.arxiv_tool: ArxivTool: 搜索 'reinforcement learning', 最近 3 天, 最多 15 篇
+2026-06-13 11:29:28,979 [INFO] agent.tools.arxiv_tool: ArxivTool: 请求 http://export.arxiv.org/api/query?search_query=%28reinforcement+learning%29+AND+%28cat%3Acs.LG+OR+cat%3Acs.AI+OR+cat%3Acs.CL+OR+cat%3Astat.ML%29&start=0&max_results=15&sortBy=submittedDate&sortOrder=descending
+2026-06-13 11:29:31,082 [INFO] agent.tools.arxiv_tool: ArxivTool: API 返回 15 条记录，正在过滤...
+2026-06-13 11:29:31,090 [INFO] agent.tools.arxiv_tool: ArxivTool: 找到 15 篇论文
+2026-06-13 11:29:31,103 [INFO] agent.dedup: Dedup: 15 条中 15 条未处理
+2026-06-13 11:29:31,103 [INFO] agent.agent_core: 步骤 2/4: 抓取 Reddit 讨论...
+2026-06-13 11:29:31,103 [INFO] agent.tools.reddit_tool: RedditTool: 获取 r/reinforcementlearning 热门帖子
+2026-06-13 11:29:31,979 [ERROR] agent.tools.reddit_tool: RedditTool 错误: HTTP Error 403: Blocked
+2026-06-13 11:29:31,983 [INFO] agent.agent_core: 步骤 3/4: LLM 整理内容...
+2026-06-13 11:29:31,983 [INFO] agent.content_processor: ContentProcessor: 正在整理原始数据 (12014 字符)
+2026-06-13 11:29:32,246 [INFO] httpx: HTTP Request: POST https://api.deepseek.com/chat/completions "HTTP/1.1 200 OK"
+2026-06-13 11:29:48,654 [INFO] agent.content_processor: ContentProcessor: 整理完成 (2400 字符)
+2026-06-13 11:29:48,745 [INFO] httpx: HTTP Request: POST https://api.deepseek.com/chat/completions "HTTP/1.1 200 OK"
+2026-06-13 11:29:51,093 [INFO] agent.agent_core: 步骤 4/4: 发布到博客...
+2026-06-13 11:29:51,093 [INFO] agent.tools.publish_tool: PublishTool: 准备发布文章 '强化学习研究日报 - 2026年06月13日'
+2026-06-13 11:29:51,126 [INFO] agent.tools.publish_tool: PublishTool: 发布成功 - http://127.0.0.1:5000/article/强化学习研究日报---2026年06月13日-58e5134d
+2026-06-13 11:29:51,128 [INFO] agent.agent_core: 发布结果: [成功] 文章已发布！
+标题: 强化学习研究日报 - 2026年06月13日
+URL: http://127.0.0.1:5000/article/强化学习研究日报---2026年06月13日-58e5134d
+ID: 3
+2026-06-13 11:29:51,128 [INFO] agent.agent_core: === 流水线完成 ===
+2026-06-13 11:29:51,128 [INFO] agent.agent_core: 论文: 15 篇 | 讨论: 0 条
+2026-06-13 11:29:51,128 [INFO] agent.agent_core: 发布: 成功
+2026-06-13 11:29:51,129 [WARNING] agent.agent_core: 错误: ['Reddit 抓取失败: [错误] Reddit API 请求失败: HTTP Error 403: Blocked']
+2026-06-13 11:29:51,129 [INFO] __main__: 结果摘要: {'date': '2026年06月13日', 'arxiv_papers': 15, 'reddit_posts': 0, 'published': True, 'article_url': 'http://127.0.0.1:5000/article/强化学习研究日报---2026年06月13日-58e5134d\nID: 3', 'errors': ['Reddit 抓取失败: [错误] Reddit API 请求失败: HTTP Error 403: Blocked']}
+2026-06-13 15:06:42,798 [INFO] __main__: 正在初始化 RL Agent...
+2026-06-13 15:06:42,800 [INFO] langchain_openai.chat_models._client_utils: langchain-openai detected system proxy configuration and no explicit `http_socket_options` / `http_client` / `http_async_client` / `openai_proxy`; skipping the custom `httpx` transport so httpx's env-proxy auto-detection applies. Pass `http_socket_options=[...]` to opt back into kernel-level TCP keepalive tuning on top of the env proxy.
+2026-06-13 15:06:43,889 [INFO] __main__: Agent 初始化完成
+2026-06-13 15:06:43,889 [INFO] __main__: 博客地址: http://127.0.0.1:5000
+2026-06-13 15:06:43,890 [INFO] __main__: === 单次运行模式 ===
+2026-06-13 15:06:43,890 [INFO] agent.agent_core: === RL Agent 流水线启动 - 2026年06月13日 ===
+2026-06-13 15:06:43,890 [INFO] agent.agent_core: 步骤 1/4: 抓取 arXiv 论文...
+2026-06-13 15:06:43,908 [INFO] agent.tools.arxiv_tool: ArxivTool: 搜索 'reinforcement learning', 最近 3 天, 最多 15 篇
+2026-06-13 15:06:43,909 [INFO] agent.tools.arxiv_tool: ArxivTool: 请求 http://export.arxiv.org/api/query?search_query=%28reinforcement+learning%29+AND+%28cat%3Acs.LG+OR+cat%3Acs.AI+OR+cat%3Acs.CL+OR+cat%3Astat.ML%29&start=0&max_results=15&sortBy=submittedDate&sortOrder=descending
+2026-06-13 15:06:46,838 [INFO] agent.tools.arxiv_tool: ArxivTool: API 返回 15 条记录，正在过滤...
+2026-06-13 15:06:46,842 [INFO] agent.tools.arxiv_tool: ArxivTool: 找到 15 篇论文
+2026-06-13 15:06:46,847 [INFO] agent.dedup: Dedup: 15 条中 15 条未处理
+2026-06-13 15:06:46,847 [INFO] agent.agent_core: 步骤 2/4: 抓取 Reddit 讨论...
+2026-06-13 15:06:46,848 [INFO] agent.tools.reddit_tool: RedditTool: 获取 r/reinforcementlearning 热门帖子
+2026-06-13 15:06:49,442 [ERROR] agent.tools.reddit_tool: RedditTool 错误: HTTP Error 403: Blocked
+2026-06-13 15:06:49,444 [INFO] agent.agent_core: 步骤 3/4: LLM 整理内容...
+2026-06-13 15:06:49,447 [INFO] agent.content_processor: ContentProcessor: 正在整理原始数据 (12014 字符)
+2026-06-13 15:06:49,834 [INFO] httpx: HTTP Request: POST https://api.deepseek.com/chat/completions "HTTP/1.1 200 OK"
+2026-06-13 15:07:18,797 [INFO] agent.content_processor: ContentProcessor: 整理完成 (4777 字符)
+2026-06-13 15:07:19,531 [INFO] httpx: HTTP Request: POST https://api.deepseek.com/chat/completions "HTTP/1.1 200 OK"
+2026-06-13 15:07:24,221 [INFO] agent.agent_core: 步骤 4/4: 发布到博客...
+2026-06-13 15:07:24,224 [INFO] agent.tools.publish_tool: PublishTool: 准备发布文章 '强化学习研究日报 - 2026年06月13日'
+2026-06-13 15:07:24,547 [INFO] agent.tools.publish_tool: PublishTool: 发布成功 - http://127.0.0.1:5000/article/强化学习研究日报---2026年06月13日-5c1bf5b3
+2026-06-13 15:07:24,547 [INFO] agent.agent_core: 发布结果: [成功] 文章已发布！
+标题: 强化学习研究日报 - 2026年06月13日
+URL: http://127.0.0.1:5000/article/强化学习研究日报---2026年06月13日-5c1bf5b3
+ID: 4
+2026-06-13 15:07:24,548 [INFO] agent.agent_core: === 流水线完成 ===
+2026-06-13 15:07:24,548 [INFO] agent.agent_core: 论文: 15 篇 | 讨论: 0 条
+2026-06-13 15:07:24,548 [INFO] agent.agent_core: 发布: 成功
+2026-06-13 15:07:24,549 [WARNING] agent.agent_core: 错误: ['Reddit 抓取失败: [错误] Reddit API 请求失败: HTTP Error 403: Blocked']
+2026-06-13 15:07:24,549 [INFO] __main__: 结果摘要: {'date': '2026年06月13日', 'arxiv_papers': 15, 'reddit_posts': 0, 'published': True, 'article_url': 'http://127.0.0.1:5000/article/强化学习研究日报---2026年06月13日-5c1bf5b3\nID: 4', 'errors': ['Reddit 抓取失败: [错误] Reddit API 请求失败: HTTP Error 403: Blocked']}
+2026-06-13 15:14:40,566 [INFO] __main__: 正在初始化 RL Agent...
+2026-06-13 15:14:41,442 [INFO] __main__: Agent 初始化完成
+2026-06-13 15:14:41,442 [INFO] __main__: 博客地址: http://127.0.0.1:5000
+2026-06-13 15:14:41,442 [INFO] __main__: === 单次运行模式 ===
+2026-06-13 15:14:41,443 [INFO] agent.agent_core: === RL Agent 流水线启动 - 2026年06月13日 ===
+2026-06-13 15:14:41,443 [INFO] agent.agent_core: 步骤 1/4: 抓取 arXiv 论文...
+2026-06-13 15:14:41,453 [INFO] agent.tools.arxiv_tool: ArxivTool: 搜索 'reinforcement learning', 最近 3 天, 最多 15 篇
+2026-06-13 15:14:41,453 [INFO] agent.tools.arxiv_tool: ArxivTool: 请求 http://export.arxiv.org/api/query?search_query=%28reinforcement+learning%29+AND+%28cat%3Acs.LG+OR+cat%3Acs.AI+OR+cat%3Acs.CL+OR+cat%3Astat.ML%29&start=0&max_results=15&sortBy=submittedDate&sortOrder=descending
+2026-06-13 15:14:43,713 [INFO] agent.tools.arxiv_tool: ArxivTool: API 返回 15 条记录，正在过滤...
+2026-06-13 15:14:43,716 [INFO] agent.tools.arxiv_tool: ArxivTool: 找到 15 篇论文
+2026-06-13 15:14:43,720 [INFO] agent.dedup: Dedup: 15 条中 15 条未处理
+2026-06-13 15:14:43,722 [INFO] agent.agent_core: 步骤 2/4: 抓取 Reddit 讨论...
+2026-06-13 15:14:43,723 [INFO] agent.tools.reddit_tool: RedditTool: 获取 r/reinforcementlearning 热门帖子
+2026-06-13 15:14:58,868 [ERROR] agent.tools.reddit_tool: RedditTool 错误: <urlopen error timed out>
+2026-06-13 15:14:58,873 [INFO] agent.agent_core: 步骤 3/4: LLM 整理内容...
+2026-06-13 15:14:58,873 [INFO] agent.content_processor: ContentProcessor: 正在整理原始数据 (12014 字符)
+2026-06-13 15:14:59,301 [INFO] httpx: HTTP Request: POST https://api.deepseek.com/chat/completions "HTTP/1.1 200 OK"
+2026-06-13 15:15:23,553 [INFO] agent.content_processor: ContentProcessor: 整理完成 (2759 字符)
+2026-06-13 15:15:23,740 [INFO] httpx: HTTP Request: POST https://api.deepseek.com/chat/completions "HTTP/1.1 200 OK"
+2026-06-13 15:15:25,733 [INFO] agent.agent_core: 步骤 4/4: 发布到博客...
+2026-06-13 15:15:25,735 [INFO] agent.tools.publish_tool: PublishTool: 准备发布文章 '强化学习研究日报 - 2026年06月13日'
+2026-06-13 15:15:25,847 [INFO] agent.tools.publish_tool: PublishTool: 发布成功 - http://127.0.0.1:5000/article/强化学习研究日报---2026年06月13日-8453bccf
+2026-06-13 15:15:25,847 [INFO] agent.agent_core: 发布结果: [成功] 文章已发布！
+标题: 强化学习研究日报 - 2026年06月13日
+URL: http://127.0.0.1:5000/article/强化学习研究日报---2026年06月13日-8453bccf
+ID: 5
+2026-06-13 15:15:25,847 [INFO] agent.agent_core: === 流水线完成 ===
+2026-06-13 15:15:25,847 [INFO] agent.agent_core: 论文: 15 篇 | 讨论: 0 条
+2026-06-13 15:15:25,847 [INFO] agent.agent_core: 发布: 成功
+2026-06-13 15:15:25,847 [WARNING] agent.agent_core: 错误: ['Reddit 抓取失败: [错误] Reddit API 请求失败: <urlopen error timed out>']
+2026-06-13 15:15:25,847 [INFO] __main__: 结果摘要: {'date': '2026年06月13日', 'arxiv_papers': 15, 'reddit_posts': 0, 'published': True, 'article_url': 'http://127.0.0.1:5000/article/强化学习研究日报---2026年06月13日-8453bccf\nID: 5', 'errors': ['Reddit 抓取失败: [错误] Reddit API 请求失败: <urlopen error timed out>']}
+2026-06-13 15:22:24,248 [INFO] __main__: 正在初始化 RL Agent...
+2026-06-13 15:22:25,432 [INFO] __main__: Agent 初始化完成
+2026-06-13 15:22:25,433 [INFO] __main__: 博客地址: http://127.0.0.1:5000
+2026-06-13 15:22:25,433 [INFO] __main__: === 单次运行模式 ===
+2026-06-13 15:22:25,435 [INFO] agent.agent_core: === RL Agent 流水线启动 - 2026年06月13日 ===
+2026-06-13 15:22:25,435 [INFO] agent.agent_core: 步骤 1/4: 抓取 arXiv 论文...
+2026-06-13 15:22:25,449 [INFO] agent.tools.arxiv_tool: ArxivTool: 搜索 'reinforcement learning', 最近 3 天, 最多 15 篇
+2026-06-13 15:22:25,452 [INFO] agent.tools.arxiv_tool: ArxivTool: 请求 http://export.arxiv.org/api/query?search_query=%28reinforcement+learning%29+AND+%28cat%3Acs.LG+OR+cat%3Acs.AI+OR+cat%3Acs.CL+OR+cat%3Astat.ML%29&start=0&max_results=15&sortBy=submittedDate&sortOrder=descending
+2026-06-13 15:22:28,240 [INFO] agent.tools.arxiv_tool: ArxivTool: API 返回 15 条记录，正在过滤...
+2026-06-13 15:22:28,251 [INFO] agent.tools.arxiv_tool: ArxivTool: 找到 15 篇论文
+2026-06-13 15:22:28,274 [INFO] agent.dedup: Dedup: 15 条中 15 条未处理
+2026-06-13 15:22:28,279 [INFO] agent.agent_core: 步骤 2/4: 抓取 Reddit 讨论...
+2026-06-13 15:22:28,282 [INFO] agent.tools.reddit_tool: RedditTool: 获取 r/reinforcementlearning 热门帖子
+2026-06-13 15:22:43,552 [ERROR] agent.tools.reddit_tool: RedditTool 错误: <urlopen error _ssl.c:1000: The handshake operation timed out>
+2026-06-13 15:22:43,553 [INFO] agent.agent_core: 步骤 3/4: LLM 整理内容...
+2026-06-13 15:22:43,553 [INFO] agent.content_processor: ContentProcessor: 正在整理原始数据 (12014 字符)
+2026-06-13 15:22:44,219 [INFO] httpx: HTTP Request: POST https://api.deepseek.com/chat/completions "HTTP/1.1 200 OK"
+2026-06-13 15:23:13,868 [INFO] agent.content_processor: ContentProcessor: 整理完成 (2848 字符)
+2026-06-13 15:23:14,223 [INFO] httpx: HTTP Request: POST https://api.deepseek.com/chat/completions "HTTP/1.1 200 OK"
+2026-06-13 15:23:18,769 [INFO] agent.agent_core: 步骤 4/4: 发布到博客...
+2026-06-13 15:23:18,771 [INFO] agent.tools.publish_tool: PublishTool: 准备发布文章 '强化学习研究日报 - 2026年06月13日'
+2026-06-13 15:23:18,948 [INFO] agent.tools.publish_tool: PublishTool: 发布成功 - http://127.0.0.1:5000/article/强化学习研究日报---2026年06月13日-811e6dbf
+2026-06-13 15:23:18,948 [INFO] agent.agent_core: 发布结果: [成功] 文章已发布！
+标题: 强化学习研究日报 - 2026年06月13日
+URL: http://127.0.0.1:5000/article/强化学习研究日报---2026年06月13日-811e6dbf
+ID: 1
+2026-06-13 15:23:18,948 [INFO] agent.agent_core: === 流水线完成 ===
+2026-06-13 15:23:18,948 [INFO] agent.agent_core: 论文: 15 篇 | 讨论: 0 条
+2026-06-13 15:23:18,948 [INFO] agent.agent_core: 发布: 成功
+2026-06-13 15:23:18,948 [WARNING] agent.agent_core: 错误: ['Reddit 抓取失败: [错误] Reddit API 请求失败: <urlopen error _ssl.c:1000: The handshake operation timed out>']
+2026-06-13 15:23:18,950 [INFO] __main__: 结果摘要: {'date': '2026年06月13日', 'arxiv_papers': 15, 'reddit_posts': 0, 'published': True, 'article_url': 'http://127.0.0.1:5000/article/强化学习研究日报---2026年06月13日-811e6dbf\nID: 1', 'errors': ['Reddit 抓取失败: [错误] Reddit API 请求失败: <urlopen error _ssl.c:1000: The handshake operation timed out>']}
+2026-06-13 15:55:42,652 [INFO] __main__: 正在初始化 RL Agent...
+2026-06-13 15:55:43,954 [INFO] __main__: Agent 初始化完成
+2026-06-13 15:55:43,955 [INFO] __main__: 博客地址: http://127.0.0.1:5000
+2026-06-13 15:55:43,955 [INFO] __main__: === 单次运行模式 ===
+2026-06-13 15:55:43,955 [INFO] agent.agent_core: === RL Agent 流水线启动 - 2026年06月13日 ===
+2026-06-13 15:55:43,956 [INFO] agent.agent_core: 步骤 1/4: 抓取 arXiv 论文...
+2026-06-13 15:55:43,972 [INFO] agent.tools.arxiv_tool: ArxivTool: 搜索 'reinforcement learning', 最近 3 天, 最多 15 篇
+2026-06-13 15:55:43,973 [INFO] agent.tools.arxiv_tool: ArxivTool: 请求 http://export.arxiv.org/api/query?search_query=%28reinforcement+learning%29+AND+%28cat%3Acs.LG+OR+cat%3Acs.AI+OR+cat%3Acs.CL+OR+cat%3Astat.ML%29&start=0&max_results=15&sortBy=submittedDate&sortOrder=descending
+2026-06-13 15:55:51,400 [INFO] agent.tools.arxiv_tool: ArxivTool: API 返回 15 条记录，正在过滤...
+2026-06-13 15:55:51,422 [INFO] agent.tools.arxiv_tool: ArxivTool: 找到 15 篇论文
+2026-06-13 15:55:51,434 [INFO] agent.dedup: Dedup: 15 条中 15 条未处理
+2026-06-13 15:55:51,434 [INFO] agent.agent_core: 步骤 2/4: 抓取 HuggingFace Papers...
+2026-06-13 15:55:51,437 [INFO] agent.tools.huggingface_tool: HFTool: 访问 https://huggingface.co/papers?tag=Reinforcement+Learning
+2026-06-13 16:02:13,138 [INFO] __main__: 正在初始化 RL Agent...
+2026-06-13 16:02:13,138 [INFO] langchain_openai.chat_models._client_utils: langchain-openai detected system proxy configuration and no explicit `http_socket_options` / `http_client` / `http_async_client` / `openai_proxy`; skipping the custom `httpx` transport so httpx's env-proxy auto-detection applies. Pass `http_socket_options=[...]` to opt back into kernel-level TCP keepalive tuning on top of the env proxy.
+2026-06-13 16:02:14,251 [INFO] __main__: Agent 初始化完成
+2026-06-13 16:02:14,252 [INFO] __main__: 博客地址: http://127.0.0.1:5000
+2026-06-13 16:02:14,252 [INFO] __main__: === 单次运行模式 ===
+2026-06-13 16:02:14,252 [INFO] agent.agent_core: === RL Agent 流水线启动 - 2026年06月13日 ===
+2026-06-13 16:02:14,253 [INFO] agent.agent_core: 步骤 1/4: 抓取 arXiv 论文...
+2026-06-13 16:02:14,268 [INFO] agent.tools.arxiv_tool: ArxivTool: 搜索 'reinforcement learning', 最近 3 天, 最多 15 篇
+2026-06-13 16:02:14,270 [INFO] agent.tools.arxiv_tool: ArxivTool: 请求 http://export.arxiv.org/api/query?search_query=%28reinforcement+learning%29+AND+%28cat%3Acs.LG+OR+cat%3Acs.AI+OR+cat%3Acs.CL+OR+cat%3Astat.ML%29&start=0&max_results=15&sortBy=submittedDate&sortOrder=descending
+2026-06-13 16:02:17,015 [INFO] agent.tools.arxiv_tool: ArxivTool: API 返回 15 条记录，正在过滤...
+2026-06-13 16:02:17,021 [INFO] agent.tools.arxiv_tool: ArxivTool: 找到 15 篇论文
+2026-06-13 16:02:17,035 [INFO] agent.dedup: Dedup: 15 条中 15 条未处理
+2026-06-13 16:02:17,036 [INFO] agent.agent_core: 步骤 2/4: 抓取 HuggingFace Papers...
+2026-06-13 16:02:17,037 [INFO] agent.tools.huggingface_tool: HFTool: 访问 https://huggingface.co/papers?tag=Reinforcement+Learning
+2026-06-13 16:02:37,614 [WARNING] agent.tools.huggingface_tool: HFTool: 论文卡片加载超时，尝试直接提取
+2026-06-13 16:02:45,738 [INFO] agent.tools.huggingface_tool: HFTool: 找到 44 个 <article> 卡片
+2026-06-13 16:02:47,890 [INFO] agent.tools.huggingface_tool: HFTool: 成功提取 10 篇论文
+2026-06-13 16:02:48,027 [INFO] agent.dedup: Dedup: 10 条中 10 条未处理
+2026-06-13 16:02:48,028 [INFO] agent.agent_core: 步骤 3/4: LLM 整理内容...
+2026-06-13 16:02:48,028 [INFO] agent.content_processor: ContentProcessor: 正在整理原始数据 (12014 字符)
+2026-06-13 16:02:48,361 [INFO] httpx: HTTP Request: POST https://api.deepseek.com/chat/completions "HTTP/1.1 200 OK"
+2026-06-13 16:03:09,884 [INFO] agent.content_processor: ContentProcessor: 整理完成 (3073 字符)
+2026-06-13 16:03:10,011 [INFO] httpx: HTTP Request: POST https://api.deepseek.com/chat/completions "HTTP/1.1 200 OK"
+2026-06-13 16:03:12,279 [INFO] agent.agent_core: 步骤 4/4: 发布到博客...
+2026-06-13 16:03:12,282 [INFO] agent.tools.publish_tool: PublishTool: 准备发布文章 '强化学习研究日报 - 2026年06月13日'
+2026-06-13 16:03:12,399 [INFO] agent.tools.publish_tool: PublishTool: 发布成功 - http://127.0.0.1:5000/article/强化学习研究日报---2026年06月13日-ee071864
+2026-06-13 16:03:12,404 [INFO] agent.agent_core: 发布结果: [成功] 文章已发布！
+标题: 强化学习研究日报 - 2026年06月13日
+URL: http://127.0.0.1:5000/article/强化学习研究日报---2026年06月13日-ee071864
+ID: 2
+2026-06-13 16:03:12,404 [INFO] agent.agent_core: === 流水线完成 ===
+2026-06-13 16:03:12,404 [INFO] agent.agent_core: 论文(arXiv): 15 篇 | 论文(HF): 10 篇
+2026-06-13 16:03:12,405 [INFO] agent.agent_core: 发布: 成功
+2026-06-13 16:03:12,405 [INFO] __main__: 结果摘要: {'date': '2026年06月13日', 'arxiv_papers': 15, 'huggingface_papers': 10, 'published': True, 'article_url': 'http://127.0.0.1:5000/article/强化学习研究日报---2026年06月13日-ee071864\nID: 2', 'errors': []}
+2026-06-13 16:05:55,402 [INFO] __main__: 正在初始化 RL Agent...
+2026-06-13 16:05:55,403 [INFO] langchain_openai.chat_models._client_utils: langchain-openai detected system proxy configuration and no explicit `http_socket_options` / `http_client` / `http_async_client` / `openai_proxy`; skipping the custom `httpx` transport so httpx's env-proxy auto-detection applies. Pass `http_socket_options=[...]` to opt back into kernel-level TCP keepalive tuning on top of the env proxy.
+2026-06-13 16:05:56,454 [INFO] __main__: Agent 初始化完成
+2026-06-13 16:05:56,454 [INFO] __main__: 博客地址: http://127.0.0.1:5000
+2026-06-13 16:05:56,454 [INFO] __main__: === 单次运行模式 ===
+2026-06-13 16:05:56,454 [INFO] agent.agent_core: === RL Agent 流水线启动 - 2026年06月13日 ===
+2026-06-13 16:05:56,456 [INFO] agent.agent_core: 步骤 1/4: 抓取 arXiv 论文...
+2026-06-13 16:05:56,472 [INFO] agent.tools.arxiv_tool: ArxivTool: 搜索 'reinforcement learning', 最近 3 天, 最多 15 篇
+2026-06-13 16:05:56,472 [INFO] agent.tools.arxiv_tool: ArxivTool: 请求 http://export.arxiv.org/api/query?search_query=%28reinforcement+learning%29+AND+%28cat%3Acs.LG+OR+cat%3Acs.AI+OR+cat%3Acs.CL+OR+cat%3Astat.ML%29&start=0&max_results=15&sortBy=submittedDate&sortOrder=descending
+2026-06-13 16:05:58,223 [INFO] agent.tools.arxiv_tool: ArxivTool: API 返回 15 条记录，正在过滤...
+2026-06-13 16:05:58,227 [INFO] agent.tools.arxiv_tool: ArxivTool: 找到 15 篇论文
+2026-06-13 16:05:58,237 [INFO] agent.dedup: Dedup: 15 条中 15 条未处理
+2026-06-13 16:05:58,237 [INFO] agent.agent_core: 步骤 2/4: 抓取 HuggingFace Papers...
+2026-06-13 16:05:58,239 [INFO] agent.tools.huggingface_tool: HFTool: 访问 https://huggingface.co/papers?tag=Reinforcement+Learning
+2026-06-13 16:06:17,286 [WARNING] agent.tools.huggingface_tool: HFTool: 论文卡片加载超时，尝试直接提取
+2026-06-13 16:06:25,380 [INFO] agent.tools.huggingface_tool: HFTool: 找到 44 个 <article> 卡片
+2026-06-13 16:06:27,136 [INFO] agent.tools.huggingface_tool: HFTool: 成功提取 10 篇论文
+2026-06-13 16:06:27,257 [INFO] agent.dedup: Dedup: 10 条中 10 条未处理
+2026-06-13 16:06:27,258 [INFO] agent.agent_core: 步骤 3/4: LLM 整理内容...
+2026-06-13 16:06:27,258 [INFO] agent.content_processor: ContentProcessor: 正在整理原始数据 (12014 字符)
+2026-06-13 16:06:27,586 [INFO] httpx: HTTP Request: POST https://api.deepseek.com/chat/completions "HTTP/1.1 200 OK"
+2026-06-13 16:06:52,084 [INFO] agent.content_processor: ContentProcessor: 整理完成 (4469 字符)
+2026-06-13 16:06:52,253 [INFO] httpx: HTTP Request: POST https://api.deepseek.com/chat/completions "HTTP/1.1 200 OK"
+2026-06-13 16:06:54,478 [INFO] agent.agent_core: 步骤 4/4: 发布到博客...
+2026-06-13 16:06:54,481 [INFO] agent.tools.publish_tool: PublishTool: 准备发布文章 '强化学习研究日报 - 2026年06月13日'
+2026-06-13 16:06:54,638 [INFO] agent.tools.publish_tool: PublishTool: 发布成功 - http://127.0.0.1:5000/article/强化学习研究日报---2026年06月13日-9a28ada8
+2026-06-13 16:06:54,639 [INFO] agent.agent_core: 发布结果: [成功] 文章已发布！
+标题: 强化学习研究日报 - 2026年06月13日
+URL: http://127.0.0.1:5000/article/强化学习研究日报---2026年06月13日-9a28ada8
+ID: 3
+2026-06-13 16:06:54,639 [INFO] agent.agent_core: === 流水线完成 ===
+2026-06-13 16:06:54,639 [INFO] agent.agent_core: 论文(arXiv): 15 篇 | 论文(HF): 10 篇
+2026-06-13 16:06:54,640 [INFO] agent.agent_core: 发布: 成功
+2026-06-13 16:06:54,640 [INFO] __main__: 结果摘要: {'date': '2026年06月13日', 'arxiv_papers': 15, 'huggingface_papers': 10, 'published': True, 'article_url': 'http://127.0.0.1:5000/article/强化学习研究日报---2026年06月13日-9a28ada8\nID: 3', 'errors': []}
+2026-06-13 16:11:17,442 [INFO] __main__: 正在初始化 RL Agent...
+2026-06-13 16:11:17,445 [INFO] langchain_openai.chat_models._client_utils: langchain-openai detected system proxy configuration and no explicit `http_socket_options` / `http_client` / `http_async_client` / `openai_proxy`; skipping the custom `httpx` transport so httpx's env-proxy auto-detection applies. Pass `http_socket_options=[...]` to opt back into kernel-level TCP keepalive tuning on top of the env proxy.
+2026-06-13 16:11:20,539 [INFO] __main__: Agent 初始化完成
+2026-06-13 16:11:20,539 [INFO] __main__: 博客地址: http://127.0.0.1:5000
+2026-06-13 16:11:20,540 [INFO] __main__: === 单次运行模式 ===
+2026-06-13 16:11:20,542 [INFO] agent.agent_core: === RL Agent 流水线启动 - 2026年06月13日 ===
+2026-06-13 16:11:20,542 [INFO] agent.agent_core: 步骤 1/4: 抓取 arXiv 论文...
+2026-06-13 16:11:20,584 [INFO] agent.tools.arxiv_tool: ArxivTool: 搜索 'reinforcement learning', 最近 3 天, 最多 15 篇
+2026-06-13 16:11:20,584 [INFO] agent.tools.arxiv_tool: ArxivTool: 请求 http://export.arxiv.org/api/query?search_query=%28reinforcement+learning%29+AND+%28cat%3Acs.LG+OR+cat%3Acs.AI+OR+cat%3Acs.CL+OR+cat%3Astat.ML%29&start=0&max_results=15&sortBy=submittedDate&sortOrder=descending
+2026-06-13 16:11:22,869 [INFO] agent.tools.arxiv_tool: ArxivTool: API 返回 15 条记录，正在过滤...
+2026-06-13 16:11:22,891 [INFO] agent.tools.arxiv_tool: ArxivTool: 找到 15 篇论文
+2026-06-13 16:11:22,923 [INFO] agent.dedup: Dedup: 15 条中 15 条未处理
+2026-06-13 16:11:22,924 [INFO] agent.agent_core: 步骤 2/4: 抓取 HuggingFace Papers...
+2026-06-13 16:11:22,927 [INFO] agent.tools.huggingface_tool: HFTool: 访问 https://huggingface.co/papers?tag=Reinforcement+Learning
+2026-06-13 16:11:43,560 [WARNING] agent.tools.huggingface_tool: HFTool: 论文卡片加载超时，尝试直接提取
+2026-06-13 16:11:51,761 [INFO] agent.tools.huggingface_tool: HFTool: 找到 44 个 <article> 卡片
+2026-06-13 16:11:55,388 [INFO] agent.tools.huggingface_tool: HFTool: 成功提取 10 篇论文
+2026-06-13 16:11:55,589 [INFO] agent.dedup: Dedup: 10 条中 10 条未处理
+2026-06-13 16:11:55,589 [INFO] agent.agent_core: 步骤 3/4: LLM 整理内容...
+2026-06-13 16:11:55,591 [INFO] agent.content_processor: ContentProcessor: 正在整理原始数据 (16823 字符)
+2026-06-13 16:11:56,051 [INFO] httpx: HTTP Request: POST https://api.deepseek.com/chat/completions "HTTP/1.1 200 OK"
+2026-06-13 16:12:22,922 [INFO] agent.content_processor: ContentProcessor: 整理完成 (3613 字符)
+2026-06-13 16:12:23,066 [INFO] httpx: HTTP Request: POST https://api.deepseek.com/chat/completions "HTTP/1.1 200 OK"
+2026-06-13 16:12:26,089 [INFO] agent.agent_core: 步骤 4/4: 发布到博客...
+2026-06-13 16:12:26,093 [INFO] agent.tools.publish_tool: PublishTool: 准备发布文章 '强化学习研究日报 - 2026年06月13日'
+2026-06-13 16:12:26,296 [INFO] agent.tools.publish_tool: PublishTool: 发布成功 - http://127.0.0.1:5000/article/强化学习研究日报---2026年06月13日-b5d82783
+2026-06-13 16:12:26,298 [INFO] agent.agent_core: 发布结果: [成功] 文章已发布！
+标题: 强化学习研究日报 - 2026年06月13日
+URL: http://127.0.0.1:5000/article/强化学习研究日报---2026年06月13日-b5d82783
+ID: 4
+2026-06-13 16:12:26,301 [INFO] agent.agent_core: === 流水线完成 ===
+2026-06-13 16:12:26,301 [INFO] agent.agent_core: 论文(arXiv): 15 篇 | 论文(HF): 10 篇
+2026-06-13 16:12:26,302 [INFO] agent.agent_core: 发布: 成功
+2026-06-13 16:12:26,303 [INFO] __main__: 结果摘要: {'date': '2026年06月13日', 'arxiv_papers': 15, 'huggingface_papers': 10, 'published': True, 'article_url': 'http://127.0.0.1:5000/article/强化学习研究日报---2026年06月13日-b5d82783\nID: 4', 'errors': []}
+2026-06-13 16:14:16,324 [INFO] __main__: 正在初始化 RL Agent...
+2026-06-13 16:14:16,325 [INFO] langchain_openai.chat_models._client_utils: langchain-openai detected system proxy configuration and no explicit `http_socket_options` / `http_client` / `http_async_client` / `openai_proxy`; skipping the custom `httpx` transport so httpx's env-proxy auto-detection applies. Pass `http_socket_options=[...]` to opt back into kernel-level TCP keepalive tuning on top of the env proxy.
+2026-06-13 16:14:18,961 [INFO] __main__: Agent 初始化完成
+2026-06-13 16:14:18,961 [INFO] __main__: 博客地址: http://127.0.0.1:5000
+2026-06-13 16:14:18,963 [INFO] __main__: === 单次运行模式 ===
+2026-06-13 16:14:18,964 [INFO] agent.agent_core: === RL Agent 流水线启动 - 2026年06月13日 ===
+2026-06-13 16:14:18,966 [INFO] agent.agent_core: 步骤 1/4: 抓取 arXiv 论文...
+2026-06-13 16:14:18,999 [INFO] agent.tools.arxiv_tool: ArxivTool: 搜索 'reinforcement learning', 最近 3 天, 最多 15 篇
+2026-06-13 16:14:18,999 [INFO] agent.tools.arxiv_tool: ArxivTool: 请求 http://export.arxiv.org/api/query?search_query=%28reinforcement+learning%29+AND+%28cat%3Acs.LG+OR+cat%3Acs.AI+OR+cat%3Acs.CL+OR+cat%3Astat.ML%29&start=0&max_results=15&sortBy=submittedDate&sortOrder=descending
+2026-06-13 16:14:20,833 [INFO] agent.tools.arxiv_tool: ArxivTool: API 返回 15 条记录，正在过滤...
+2026-06-13 16:14:20,845 [INFO] agent.tools.arxiv_tool: ArxivTool: 找到 15 篇论文
+2026-06-13 16:14:20,880 [INFO] agent.dedup: Dedup: 15 条中 15 条未处理
+2026-06-13 16:14:20,884 [INFO] agent.agent_core: 步骤 2/4: 抓取 HuggingFace Papers...
+2026-06-13 16:14:20,886 [INFO] agent.tools.huggingface_tool: HFTool: 访问 https://huggingface.co/papers?tag=Reinforcement+Learning
+2026-06-13 16:14:43,081 [WARNING] agent.tools.huggingface_tool: HFTool: 论文卡片加载超时，尝试直接提取
+2026-06-13 16:14:51,273 [INFO] agent.tools.huggingface_tool: HFTool: 找到 44 个 <article> 卡片
+2026-06-13 16:14:55,159 [INFO] agent.tools.huggingface_tool: HFTool: 成功提取 10 篇论文
+2026-06-13 16:14:55,390 [INFO] agent.dedup: Dedup: 10 条中 10 条未处理
+2026-06-13 16:14:55,391 [INFO] agent.agent_core: 步骤 3/4: LLM 整理内容...
+2026-06-13 16:14:55,392 [INFO] agent.content_processor: ContentProcessor: 正在整理原始数据 (16823 字符)
+2026-06-13 16:14:55,896 [INFO] httpx: HTTP Request: POST https://api.deepseek.com/chat/completions "HTTP/1.1 200 OK"
+2026-06-13 16:15:20,586 [INFO] agent.content_processor: ContentProcessor: 整理完成 (4039 字符)
+2026-06-13 16:15:20,775 [INFO] httpx: HTTP Request: POST https://api.deepseek.com/chat/completions "HTTP/1.1 200 OK"
+2026-06-13 16:15:23,443 [INFO] agent.agent_core: 步骤 4/4: 发布到博客...
+2026-06-13 16:15:23,445 [INFO] agent.tools.publish_tool: PublishTool: 准备发布文章 '强化学习研究日报 - 2026年06月13日'
+2026-06-13 16:15:23,554 [INFO] agent.tools.publish_tool: PublishTool: 发布成功 - http://127.0.0.1:5000/article/强化学习研究日报---2026年06月13日-e1e8ff4c
+2026-06-13 16:15:23,554 [INFO] agent.agent_core: 发布结果: [成功] 文章已发布！
+标题: 强化学习研究日报 - 2026年06月13日
+URL: http://127.0.0.1:5000/article/强化学习研究日报---2026年06月13日-e1e8ff4c
+ID: 5
+2026-06-13 16:15:23,554 [INFO] agent.agent_core: === 流水线完成 ===
+2026-06-13 16:15:23,554 [INFO] agent.agent_core: 论文(arXiv): 15 篇 | 论文(HF): 10 篇
+2026-06-13 16:15:23,554 [INFO] agent.agent_core: 发布: 成功
+2026-06-13 16:15:23,554 [INFO] __main__: 结果摘要: {'date': '2026年06月13日', 'arxiv_papers': 15, 'huggingface_papers': 10, 'published': True, 'article_url': 'http://127.0.0.1:5000/article/强化学习研究日报---2026年06月13日-e1e8ff4c\nID: 5', 'errors': []}
